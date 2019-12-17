@@ -84,6 +84,6 @@ right_sensor.when_no_line = lambda: right_update(False)
 
 #signal.signal(signal.SIGINT, lambda x: stop())
 
-#while 1:
-update_states()
-  #  time.sleep(0.1)
+while 1:
+    update_states()
+    time.sleep(0.1)
