@@ -16,7 +16,7 @@ dry_run = False
 
 low_speed = 0
 turning_speed = 15
-high_speed = 15
+high_speed = 25
 
 def go_left():
     global dry_run, low_speed, turning_speed, high_speed, left_motor, right_motor
