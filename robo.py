@@ -2,9 +2,11 @@ import explorerhat as eh
 import time
 from gpiozero import LineSensor
 import signal
+import RPi.GPIO as GPIO
 import Freenove_DHT as DHT
 DHTPin = 19     #define the pin of DHT11
 
+GPIO.setwarnings(False)
 dht = DHT.DHT(DHTPin)
 
 left_sensor = LineSensor(24)
