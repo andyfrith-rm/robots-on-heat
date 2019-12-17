@@ -4,7 +4,7 @@ from gpiozero import LineSensor
 import signal
 import RPi.GPIO as GPIO
 import Freenove_DHT as DHT
-DHTPin = 19     #define the pin of DHT11
+DHTPin = 10   #define the pin of DHT11
 
 left_sensor = LineSensor(24)
 right_sensor= LineSensor(25)
@@ -88,8 +88,12 @@ def temperature_update():
    chk = dht.readDHT11()
    if (chk is dht.DHTLIB_OK):
        print('Temperature:' + dht.temperature)
-   else:
-       temperature_update()
+   elif(chk is dht.DHTLIB_ERROR_CHECKSUM): #data check has errors
+       print("DHTLIB_ERROR_CHECKSUM!!")
+   elif(chk is dht.DHTLIB_ERROR_TIMEOUT):  #reading DHT times out
+       print("DHTLIB_ERROR_TIMEOUT!")
+   else:               #other errors
+       print("Other error!")
 
 left_sensor.when_line = lambda: left_update(True)
 left_sensor.when_no_line = lambda: left_update(False)
