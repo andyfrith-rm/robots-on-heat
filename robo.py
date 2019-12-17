@@ -53,13 +53,14 @@ def update_states():
     if left_on_line and right_on_line:
 #        print('left on line' + str(left_on_line))
 #        print('right on line' + str(right_on_line))
-        go_onwards()
+        print 'Should not get here, both sensors on line!'
+        stop()
     elif left_on_line:
         go_left()
     elif right_on_line:
         go_right()
     else:
-        stop()
+        go_onwards()
 
 def left_update(state):
     global left_on_line
