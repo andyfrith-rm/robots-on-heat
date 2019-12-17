@@ -7,6 +7,7 @@ import Freenove_DHT as DHT
 DHTPin = 19     #define the pin of DHT11
 
 GPIO.setwarnings(False)
+GPIO.cleanup()
 dht = DHT.DHT(DHTPin)
 
 left_sensor = LineSensor(24)
