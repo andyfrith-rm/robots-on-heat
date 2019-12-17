@@ -12,7 +12,7 @@ right_motor = eh.motor.two
 left_on_line = True
 right_on_line = True
 
-dry_run = False
+dry_run = True
 
 low_speed = 0
 turning_speed = 15
@@ -53,8 +53,8 @@ def update_states():
     global right_on_line
 #    print('update_states()')
     if left_on_line and right_on_line:
-        print('left on line' + str(left_on_line))
-        print('right on line' + str(right_on_line))
+#        print('left on line' + str(left_on_line))
+#        print('right on line' + str(right_on_line))
         go_onwards()
     elif left_on_line:
         go_left()
@@ -65,13 +65,13 @@ def update_states():
 
 def left_update(state):
     global left_on_line
-    print('left update: ' + str(state))
+#    print('left update: ' + str(state))
     left_on_line = state
     update_states()
         
 def right_update(state):
     global right_on_line
-    print('right update: ' + str(state))
+#    print('right update: ' + str(state))
     right_on_line = state
     update_states()
 
