@@ -16,6 +16,7 @@ dry_run = False
 
 low_speed = 0
 turning_speed = 10
+backwards_speed = -turning_speed
 high_speed = 15
 
 def go_left():
@@ -23,13 +24,13 @@ def go_left():
     print('going left')
     if not dry_run:
         left_motor.forwards(turning_speed)
-        right_motor.forwards(low_speed)
+        right_motor.forwards(backwards_speed)
     
 def go_right():
     global dry_run, low_speed, turning_speed, high_speed, left_motor, right_motor
     print('going right')
     if not dry_run:
-        left_motor.forwards(low_speed)
+        left_motor.forwards(backwards_speed)
         right_motor.forwards(turning_speed)
     
 def go_onwards():
