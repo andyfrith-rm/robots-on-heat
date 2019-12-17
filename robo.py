@@ -106,4 +106,4 @@ right_sensor.when_no_line = lambda: right_update(False)
 while 1:
     temperature_update()
     update_states()
-    time.sleep(2.0)
+    time.sleep(0.1)
