@@ -90,12 +90,15 @@ def temperature_update():
        print('Temperature:' + str(dht.temperature))
    elif(chk is dht.DHTLIB_ERROR_CHECKSUM): #data check has errors
        print("Bad data from temperature sensor")
+       time.sleep(0.5)
        temperature_update()
    elif(chk is dht.DHTLIB_ERROR_TIMEOUT):  #reading DHT times out
        print("Timeout from temperature sensor!")
+       time.sleep(0.5)
        temperature_update()
    else:               #other errors
        print("Other error from temperature sensor!")
+       time.sleep(0.5)
        temperature_update()
 
 left_sensor.when_line = lambda: left_update(True)
@@ -113,4 +116,5 @@ while 1:
     time.sleep(0.1)
     count=count+1
     if(count%100 == 0):
+        stop()
         temperature_update()
