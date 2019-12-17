@@ -6,6 +6,9 @@ import signal
 left_sensor = LineSensor(22)
 right_sensor= LineSensor(24)
 
+left_motor = eh.motor.one
+right_motor = eh.motor.two
+
 left_on_line = True
 right_on_line = True
 
@@ -21,29 +24,29 @@ def go_left():
     global dry_run, low_speed, turning_speed, high_speed
     print('going left')
     if not dry_run:
-        eh.motor.one.forwards(turning_speed)
-        eh.motor.two.forwards(low_speed)
+        left_motor.forwards(turning_speed)
+        right_motor.forwards(low_speed)
     
 def go_right():
     global dry_run, low_speed, turning_speed, high_speed
     print('going right')
     if not dry_run:
-        eh.motor.one.forwards(low_speed)
-        eh.motor.two.forwards(turning_speed)
+        left_motor.forwards(low_speed)
+        right_motor.forwards(turning_speed)
     
 def go_onwards():
     global dry_run, high_speed
     print('going onwards')
     if not dry_run:
-        eh.motor.one.forwards(high_speed)
-        eh.motor.two.forwards(high_speed)
+        left_motor.forwards(high_speed)
+        right_motor.forwards(high_speed)
 
 def stop():
     global dry_run
     print('stop')
     if not dry_run:
-        eh.motor.one.stop()
-        eh.motor.two.stop()
+        left_motor.stop()
+        right_motor.stop()
 
 def update_states():
     global left_on_line
