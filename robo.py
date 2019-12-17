@@ -15,9 +15,9 @@ right_on_line = False
 dry_run = False
 
 low_speed = 0
-turning_speed = 10
+turning_speed = 5
 backwards_speed = -turning_speed
-high_speed = 15
+high_speed = 10
 
 def go_left():
     global dry_run, low_speed, turning_speed, high_speed, left_motor, right_motor
@@ -87,4 +87,4 @@ right_sensor.when_no_line = lambda: right_update(False)
 
 while 1:
     update_states()
-    time.sleep(0.05)
+    time.sleep(0.1)
