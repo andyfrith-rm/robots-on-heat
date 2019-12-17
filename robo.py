@@ -112,5 +112,5 @@ while 1:
     update_states()
     time.sleep(0.1)
     count=count+1
-    if(count%100):
+    if(count%100 == 0):
         temperature_update()
