@@ -87,7 +87,7 @@ def temperature_update():
    dht = DHT.DHT(DHTPin)
    chk = dht.readDHT11()
    if (chk is dht.DHTLIB_OK):
-       print('Temperature:' + dht.temperature)
+       print('Temperature:' + str(dht.temperature))
    elif(chk is dht.DHTLIB_ERROR_CHECKSUM): #data check has errors
        print("DHTLIB_ERROR_CHECKSUM!!")
    elif(chk is dht.DHTLIB_ERROR_TIMEOUT):  #reading DHT times out
