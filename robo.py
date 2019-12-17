@@ -69,13 +69,13 @@ def left_update(state):
     global left_on_line
     print('left update: ' + str(state))
     left_on_line = state
-    update_states()
+    #update_states()
         
 def right_update(state):
     global right_on_line
     print('right update: ' + str(state))
     right_on_line = state
-    update_states()
+    #update_states()
 
 left_sensor.when_line = lambda: left_update(True)
 left_sensor.when_no_line = lambda: left_update(False)
