@@ -18,9 +18,9 @@ right_on_line = False
 dry_run = False
 
 low_speed = 0
-turning_speed = 5
+turning_speed = 10
 backwards_speed = -turning_speed
-high_speed = 7
+high_speed = 10
 
 def go_left():
     global dry_run, low_speed, turning_speed, high_speed, left_motor, right_motor
@@ -90,10 +90,13 @@ def temperature_update():
        print('Temperature:' + str(dht.temperature))
    elif(chk is dht.DHTLIB_ERROR_CHECKSUM): #data check has errors
        print("Bad data from temperature sensor")
+       temperature_update()
    elif(chk is dht.DHTLIB_ERROR_TIMEOUT):  #reading DHT times out
        print("Timeout from temperature sensor!")
+       temperature_update()
    else:               #other errors
        print("Other error from temperature sensor!")
+       temperature_update()
 
 left_sensor.when_line = lambda: left_update(True)
 left_sensor.when_no_line = lambda: left_update(False)
@@ -103,7 +106,11 @@ right_sensor.when_no_line = lambda: right_update(False)
 
 #signal.signal(signal.SIGINT, lambda x: stop())
 
+count=0
+
 while 1:
-    temperature_update()
     update_states()
-    time.sleep(0.5)
+    time.sleep(0.1)
+    count=count+1
+    if(count%100):
+        temperature_update()
