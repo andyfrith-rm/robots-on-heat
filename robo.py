@@ -6,8 +6,6 @@ import RPi.GPIO as GPIO
 import Freenove_DHT as DHT
 DHTPin = 19     #define the pin of DHT11
 
-dht = DHT.DHT(DHTPin)
-
 left_sensor = LineSensor(24)
 right_sensor= LineSensor(25)
 
@@ -86,6 +84,7 @@ def temperature_update():
    # global current_temperature
    # print('current temperature:' + str(state))
    # current_temperature = state
+   dht = DHT.DHT(DHTPin)
    chk = dht.readDHT11()
    if (chk is dht.DHTLIB_OK):
        print('Temperature:' + dht.temperature)
