@@ -2,6 +2,10 @@ import explorerhat as eh
 import time
 from gpiozero import LineSensor
 import signal
+import Freenove_DHT as DHT
+DHTPin = 19     #define the pin of DHT11
+
+dht = DHT.DHT(DHTPin)
 
 left_sensor = LineSensor(24)
 right_sensor= LineSensor(25)
@@ -77,6 +81,16 @@ def right_update(state):
     right_on_line = state
     #update_states()
 
+def temperature_update():
+   # global current_temperature
+   # print('current temperature:' + str(state))
+   # current_temperature = state
+   chk = dht.readDHT11()
+   if (chk is dht.DHTLIB_OK):
+       print('Temperature:' + dht.temperature)
+   else:
+       temperature_update()
+
 left_sensor.when_line = lambda: left_update(True)
 left_sensor.when_no_line = lambda: left_update(False)
 
@@ -86,5 +100,6 @@ right_sensor.when_no_line = lambda: right_update(False)
 #signal.signal(signal.SIGINT, lambda x: stop())
 
 while 1:
-    update_states()
-    time.sleep(0.1)
+    temperature_update()
+    #update_states()
+    time.sleep(2.0)
