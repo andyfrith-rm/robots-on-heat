@@ -54,8 +54,8 @@ def update_states():
     global left_on_line
     global right_on_line
 #    print('update_states()')
-    print('left on line: ' + str(left_on_line))
-    print('right on line: ' + str(right_on_line))
+  #  print('left on line: ' + str(left_on_line))
+  #  print('right on line: ' + str(right_on_line))
     if left_on_line and right_on_line:
 #        print('left on line' + str(left_on_line))
 #        print('right on line' + str(right_on_line))
@@ -70,13 +70,13 @@ def update_states():
 
 def left_update(state):
     global left_on_line
-    print('left update: ' + str(state))
+    #print('left update: ' + str(state))
     left_on_line = state
     #update_states()
         
 def right_update(state):
     global right_on_line
-    print('right update: ' + str(state))
+    #print('right update: ' + str(state))
     right_on_line = state
     #update_states()
 
@@ -89,11 +89,11 @@ def temperature_update():
    if (chk is dht.DHTLIB_OK):
        print('Temperature:' + str(dht.temperature))
    elif(chk is dht.DHTLIB_ERROR_CHECKSUM): #data check has errors
-       print("DHTLIB_ERROR_CHECKSUM!!")
+       print("Bad data from temperature sensor")
    elif(chk is dht.DHTLIB_ERROR_TIMEOUT):  #reading DHT times out
-       print("DHTLIB_ERROR_TIMEOUT!")
+       print("Timeout from temperature sensor!")
    else:               #other errors
-       print("Other error!")
+       print("Other error from temperature sensor!")
 
 left_sensor.when_line = lambda: left_update(True)
 left_sensor.when_no_line = lambda: left_update(False)
