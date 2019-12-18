@@ -98,15 +98,15 @@ def temperature_update():
    elif(chk is dht.DHTLIB_ERROR_CHECKSUM): #data check has errors
        print("Bad data from temperature sensor")
        time.sleep(0.5)
-       temperature_update()
+       return temperature_update()
    elif(chk is dht.DHTLIB_ERROR_TIMEOUT):  #reading DHT times out
        print("Timeout from temperature sensor!")
        time.sleep(0.5)
-       temperature_update()
+       return temperature_update()
    else:               #other errors
        print("Other error from temperature sensor!")
        time.sleep(0.5)
-       temperature_update()
+       return temperature_update()
 
 def push_data_to_api(temperature):
     print('Push temperature:' + str(temperature))
