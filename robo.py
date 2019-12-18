@@ -127,13 +127,12 @@ right_sensor.when_no_line = lambda: right_update(False)
 count=0
 
 while 1:
-    turn_light_on()
-   # update_states()
-   ## time.sleep(0.1)
-   # count=count+1
- #   if(count%100 == 0):
-  #      stop()
-   #     turn_light_on()
-    #    current_temperature = temperature_update()
-     #   push_data_to_api(current_temperature)
-       # turn_light_off()
+    update_states()
+    time.sleep(0.1)
+    count=count+1
+    if(count%100 == 0):
+        stop()
+        turn_light_on()
+        current_temperature = temperature_update()
+        push_data_to_api(current_temperature)
+        turn_light_off()
