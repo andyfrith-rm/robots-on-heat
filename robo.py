@@ -110,6 +110,12 @@ def push_data_to_api(temperature):
     else:
         print('Failed to push data to API')
 
+def turn_light_on():
+    eh.output.one.on()
+
+def turn_light_off():
+    eh.output.one.off()
+
 left_sensor.when_line = lambda: left_update(True)
 left_sensor.when_no_line = lambda: left_update(False)
 
@@ -126,5 +132,7 @@ while 1:
     count=count+1
     if(count%100 == 0):
         stop()
+        turn_light_on()
         current_temperature = temperature_update()
         push_data_to_api(current_temperature)
+        turn_light_off()
