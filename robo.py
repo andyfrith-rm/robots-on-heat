@@ -5,6 +5,7 @@ import signal
 import RPi.GPIO as GPIO
 import Freenove_DHT as DHT
 import requests
+import random
 
 DHTPin = 10   #define the pin of DHT11
 
@@ -54,6 +55,13 @@ def stop():
         left_motor.stop()
         right_motor.stop()
 
+def choose_random_direction():
+    direction = random.randint(0,1)
+    if direction == 0:
+      go_left()
+    else:
+      go_right()
+
 def update_states():
     global left_on_line
     global right_on_line
@@ -66,7 +74,7 @@ def update_states():
 #        print('right on line' + str(right_on_line))
         print ('Should not get here, both sensors on line!')
         turn_red_light_on()
-        stop()
+        choose_random_direction()
     elif left_on_line:
         go_left()
     elif right_on_line:
@@ -104,13 +112,16 @@ def push_data_to_api(temperature):
         'temp': str(temperature), 'floor_level':'5', 'longitude':'52.542793', 'latitude':'-0.134542'
     }
     #need a timeout
-    response = requests.post(url = API_ENDPOINT, data = data)
-    json_response = response.json()
-    print(json_response)
-    if response:
-        print('Pushed data to API')
-    else:
-        print('Failed to push data to API')
+    try:
+        response = requests.post(url = API_ENDPOINT, data = data)
+        json_response = response.json()
+        print(json_response)
+        if response:
+            print('Pushed data to API')
+        else:
+            print('Failed to push data to API')
+    except:
+        print('Exception when pushing data to API')
 
 def turn_red_light_on():
     eh.output.one.on()
