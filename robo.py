@@ -111,7 +111,8 @@ def push_data_to_api(temperature):
         'temp': temperature, 'floor_level':'5', 'longitude':'52.542793', 'latitude':'-0.134542'
     }
     response = requests.post(url = API_ENDPOINT, data = data)
-    #json_response = response.json()
+    json_response = response.json()
+    print(json_response)
     if response:
         print('Pushed data to API')
     else:
