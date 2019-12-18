@@ -4,6 +4,8 @@ from gpiozero import LineSensor
 import signal
 import RPi.GPIO as GPIO
 import Freenove_DHT as DHT
+import requests
+
 DHTPin = 10   #define the pin of DHT11
 
 left_sensor = LineSensor(24)
@@ -21,6 +23,8 @@ low_speed = 0
 turning_speed = 10
 backwards_speed = -turning_speed
 high_speed = 10
+
+API_ENDPOINT = 'http://10.129.20.29:3000/temperatures'
 
 def go_left():
     global dry_run, low_speed, turning_speed, high_speed, left_motor, right_motor
@@ -101,6 +105,17 @@ def temperature_update():
        time.sleep(0.5)
        temperature_update()
 
+def push_data_to_api():
+    data = {
+        'temp': '30.0', 'floor_level':'5', 'longitude':'52.542793', 'latitude':'-0.134542'
+    }
+    response = requests.post(url = API_ENDPOINT, data = data)
+    #json_response = response.json()
+    if response:
+        print('Pushed data to API')
+    else:
+        print('Failed to push data to API')
+
 left_sensor.when_line = lambda: left_update(True)
 left_sensor.when_no_line = lambda: left_update(False)
 
@@ -118,3 +133,4 @@ while 1:
     if(count%100 == 0):
         stop()
         temperature_update()
+        push_data_to_api()
