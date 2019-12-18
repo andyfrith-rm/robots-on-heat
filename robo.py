@@ -57,6 +57,7 @@ def stop():
 def update_states():
     global left_on_line
     global right_on_line
+    turn_red_light_off()
 #    print('update_states()')
   #  print('left on line: ' + str(left_on_line))
   #  print('right on line: ' + str(right_on_line))
@@ -64,6 +65,7 @@ def update_states():
 #        print('left on line' + str(left_on_line))
 #        print('right on line' + str(right_on_line))
         print ('Should not get here, both sensors on line!')
+        turn_red_light_on()
         stop()
     elif left_on_line:
         go_left()
@@ -110,11 +112,17 @@ def push_data_to_api(temperature):
     else:
         print('Failed to push data to API')
 
-def turn_light_on():
+def turn_red_light_on():
     eh.output.one.on()
 
-def turn_light_off():
+def turn_red_light_off():
     eh.output.one.off()
+
+def turn_blue_light_on():
+    eh.output.two.on()
+
+def turn_blue_light_off():
+    eh.output.two.off()
 
 left_sensor.when_line = lambda: left_update(True)
 left_sensor.when_no_line = lambda: left_update(False)
@@ -132,7 +140,7 @@ while 1:
     count=count+1
     if(count%100 == 0):
         stop()
-        turn_light_on()
+        turn_blue_light_on()
         current_temperature = temperature_update()
         push_data_to_api(current_temperature)
-        turn_light_off()
+        turn_blue_light_off()
