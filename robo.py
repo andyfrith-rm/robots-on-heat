@@ -85,9 +85,6 @@ def right_update(state):
     #update_states()
 
 def temperature_update():
-   # global current_temperature
-   # print('current temperature:' + str(state))
-   # current_temperature = state
    stop()
    dht = DHT.DHT(DHTPin)
    chk = dht.readDHT11()
@@ -95,21 +92,12 @@ def temperature_update():
        temp_now = dht.temperature
        print('Temperature:' + str(temp_now))
        return temp_now
-   elif(chk is dht.DHTLIB_ERROR_CHECKSUM): #data check has errors
-       print("Bad data from temperature sensor")
-       time.sleep(0.5)
-       return temperature_update()
-   elif(chk is dht.DHTLIB_ERROR_TIMEOUT):  #reading DHT times out
-       print("Timeout from temperature sensor!")
-       time.sleep(0.5)
-       return temperature_update()
-   else:               #other errors
-       print("Other error from temperature sensor!")
+   else: #error state
+       print("Error from temperature sensor!")
        time.sleep(0.5)
        return temperature_update()
 
 def push_data_to_api(temperature):
-    print('Push temperature:' + str(temperature))
     data = {
         'temp': str(temperature), 'floor_level':'5', 'longitude':'52.542793', 'latitude':'-0.134542'
     }
@@ -138,6 +126,5 @@ while 1:
     count=count+1
     if(count%100 == 0):
         stop()
-#        current_temperature = 57.3
         current_temperature = temperature_update()
         push_data_to_api(current_temperature)
