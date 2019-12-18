@@ -88,6 +88,7 @@ def temperature_update():
    # global current_temperature
    # print('current temperature:' + str(state))
    # current_temperature = state
+   stop()
    dht = DHT.DHT(DHTPin)
    chk = dht.readDHT11()
    if (chk is dht.DHTLIB_OK):
@@ -108,6 +109,7 @@ def temperature_update():
        temperature_update()
 
 def push_data_to_api(temperature):
+    print('Push temperature:' + str(temperature))
     data = {
         'temp': str(temperature), 'floor_level':'5', 'longitude':'52.542793', 'latitude':'-0.134542'
     }
