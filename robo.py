@@ -24,7 +24,7 @@ turning_speed = 10
 backwards_speed = -turning_speed
 high_speed = 10
 
-API_ENDPOINT = 'http://10.129.20.29:3000/temperatures'
+API_ENDPOINT = 'http://192.168.43.183:3000/temperatures'
 
 def go_left():
     global dry_run, low_speed, turning_speed, high_speed, left_motor, right_motor
