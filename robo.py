@@ -91,8 +91,9 @@ def temperature_update():
    dht = DHT.DHT(DHTPin)
    chk = dht.readDHT11()
    if (chk is dht.DHTLIB_OK):
-       print('Temperature:' + str(dht.temperature))
-       return dht.temperature
+       temp_now = dht.temperature
+       print('Temperature:' + str(temp_now))
+       return temp_now
    elif(chk is dht.DHTLIB_ERROR_CHECKSUM): #data check has errors
        print("Bad data from temperature sensor")
        time.sleep(0.5)
