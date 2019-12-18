@@ -110,6 +110,7 @@ def push_data_to_api(temperature):
     data = {
         'temp': temperature, 'floor_level':'5', 'longitude':'52.542793', 'latitude':'-0.134542'
     }
+    #need a timeout
     response = requests.post(url = API_ENDPOINT, data = data)
     json_response = response.json()
     print(json_response)
@@ -134,6 +135,6 @@ while 1:
     count=count+1
     if(count%100 == 0):
         stop()
-        current_temperature = 57.3
-#        current_temperature = temperature_update()
+#        current_temperature = 57.3
+        current_temperature = temperature_update()
         push_data_to_api(current_temperature)
