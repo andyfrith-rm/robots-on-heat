@@ -133,5 +133,6 @@ while 1:
     count=count+1
     if(count%100 == 0):
         stop()
-        current_temperature = temperature_update()
+        current_temperature = 57.3
+#        current_temperature = temperature_update()
         push_data_to_api(current_temperature)
