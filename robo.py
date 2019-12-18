@@ -92,6 +92,7 @@ def temperature_update():
    chk = dht.readDHT11()
    if (chk is dht.DHTLIB_OK):
        print('Temperature:' + str(dht.temperature))
+       return dht.temperature
    elif(chk is dht.DHTLIB_ERROR_CHECKSUM): #data check has errors
        print("Bad data from temperature sensor")
        time.sleep(0.5)
@@ -105,9 +106,9 @@ def temperature_update():
        time.sleep(0.5)
        temperature_update()
 
-def push_data_to_api():
+def push_data_to_api(temperature):
     data = {
-        'temp': '30.0', 'floor_level':'5', 'longitude':'52.542793', 'latitude':'-0.134542'
+        'temp': temperature, 'floor_level':'5', 'longitude':'52.542793', 'latitude':'-0.134542'
     }
     response = requests.post(url = API_ENDPOINT, data = data)
     #json_response = response.json()
@@ -132,5 +133,5 @@ while 1:
     count=count+1
     if(count%100 == 0):
         stop()
-        temperature_update()
-        push_data_to_api()
+        current_temperature = temperature_update()
+        push_data_to_api(current_temperature)
