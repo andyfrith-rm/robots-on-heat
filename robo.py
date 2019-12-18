@@ -135,4 +135,4 @@ while 1:
         turn_light_on()
         current_temperature = temperature_update()
         push_data_to_api(current_temperature)
-        turn_light_off()
+       # turn_light_off()
