@@ -96,16 +96,18 @@ def right_update(state):
 
 def temperature_update():
    stop()
+   temp_count = 0
    dht = DHT.DHT(DHTPin)
    chk = dht.readDHT11()
-   if (chk is dht.DHTLIB_OK):
-       temp_now = dht.temperature
-       print('Temperature:' + str(temp_now))
-       return temp_now
-   else: #error state
-       print("Error from temperature sensor!")
-       time.sleep(0.5)
-       return temperature_update()
+
+   while(not(chk is dht.DHTLIB_OK) && temp_count < 15):
+      print("Error from temperature sensor!")
+      time.sleep(0.5)
+      temp_count = temp_count+1
+
+   temp_now = dht.temperature
+   print('Temperature:' + str(temp_now))
+   return temp_now
 
 def push_data_to_api(temperature):
     data = {
