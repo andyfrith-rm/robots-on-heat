@@ -23,7 +23,7 @@ dry_run = False
 low_speed = 0
 turning_speed = 10
 backwards_speed = -turning_speed
-high_speed = 50
+high_speed = 10
 
 API_ENDPOINT = 'http://192.168.43.183:3000/temperatures'
 
