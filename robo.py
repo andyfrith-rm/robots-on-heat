@@ -105,9 +105,10 @@ def temperature_update():
       time.sleep(0.5)
       temp_count = temp_count+1
 
-   temp_now = dht.temperature
-   print('Temperature:' + str(temp_now))
-   return temp_now
+   if(chk is dht.DHTLIB_OK):
+      temp_now = dht.temperature
+      print('Temperature:' + str(temp_now))
+      push_data_to_api(temp_now)
 
 def push_data_to_api(temperature):
     data = {
@@ -154,6 +155,5 @@ while 1:
     if(count%100 == 0):
         stop()
         turn_blue_light_on()
-        current_temperature = temperature_update()
-        push_data_to_api(current_temperature)
+        temperature_update()
         turn_blue_light_off()
